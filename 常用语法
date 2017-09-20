@@ -1,0 +1,39 @@
+mysql select case when的用法
+select then else end 简单用法.
+
+表例子
+
+CREATE TABLE `ex_luck` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `uid` INT(10) DEFAULT NULL COMMENT 'uid',
+  `dateline` VARCHAR(15) DEFAULT NULL COMMENT '抽奖时间',
+  `give` VARCHAR(50) DEFAULT NULL COMMENT '奖励类型 1:红包,2.礼品,3.茅豆,4谢谢参与',
+  `points` VARCHAR(2) DEFAULT NULL COMMENT '消耗积分',
+  `value` VARCHAR(20) DEFAULT NULL COMMENT '奖品额度, 奖品ID',
+  `name` VARCHAR(15) DEFAULT NULL COMMENT '礼品名称',
+  `img` VARCHAR(100) DEFAULT NULL COMMENT '礼品图片',
+  `status` INT(2) DEFAULT '1' COMMENT '1.未领取 2.已领取',
+  PRIMARY KEY (`id`),
+  KEY `idx_uid` (`uid`),
+  KEY `idx_give` (`give`)
+) ENGINE=INNODB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='抽奖流水表'
+查询
+
+SELECT 
+  uid,
+  give,
+  NAME,
+  img,
+  CASE
+    WHEN give = 1 
+    THEN "现金红包" 
+    WHEN give = 2 
+    THEN "精美礼品" 
+    WHEN give = 3 
+    THEN "一把茅豆" 
+  END give_text 
+FROM
+  `ex_luck` 
+WHERE give <> 4 
+ORDER BY id DESC 
+LIMIT 50 
