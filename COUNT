@@ -1,0 +1,5 @@
+SELECT FROM_UNIXTIME(dateline,'%Y-%m-%d') AS days,COUNT(DISTINCT(uid)) AS uids,SUM(is_share) AS `share`,COUNT(`id`) AS cj,
+COUNT(IF(give = 1,TRUE,NULL)) AS xj, 
+COUNT(IF(give = 2,TRUE,NULL)) AS yhj,
+COUNT(IF(give = 4,TRUE,NULL)) AS kc
+FROM hrspl.`spl_luck` GROUP BY days;
